@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap" rel="stylesheet">
+        <title>?Давыдов Артём Сергеевич 221-362 Лабораторная работа №6</title>
+        
+    </head>
+<body>
+<main>
+   <div>
+    <h2>Возведение в степень</h2>
+    <label for="base">Введите основание: </label>
+    <input type="number" id="base" />
+    <br />
+
+    <label for="power">Введите степень: </label>
+    <input type="number" id="power" />
+    <button onclick="calculatePower()">Вычислить</button>
+    <p id="powerResult"></p>
+    </div>
+
+   <div>
+    <h2>Нахождение НОД</h2>
+        <label for="num1">Введите первое число: </label>
+        <input type="number" id="num1" />
+    <br />
+
+    <label for="num2">Введите второе число: </label>
+        <input type="number" id="num2" />
+        <button onclick="calculateGCD()">Вычислить</button>
+    <p id="gcdResult"></p>
+    </div>
+
+   <div> 
+    <h2>Наименьшая цифра</h2>
+    <label for="number">Введите число: </label>
+    <input type="number" id="number" />
+    <button onclick="findMinDigit()">Вычислить</button>
+    <p id="minDigitResult"></p>
+    </div>
+
+   <div>
+    <h2>Pluralization</h2>
+        <label for="recordsNum">Введите количество записей: </label>
+        <input type="number" id="recordsNum" />
+        <button onclick="pluralizeRecordsRes()">Вывести</button>
+    <p id="pluralizationResult"></p>
+    </div>
+
+   <div> 
+    <h2>Числа Фибоначчи</h2>
+    <label for="fibNumber">Введите номер числа: </label>
+    <input type="number" id="fibNumber" />
+    <button onclick="calculateFib()">Вычислить</button>
+    <p id="fibResult"></p>
+    </div>
+
+    <script>
+        function pow(x, n) {
+            if (n === 0) {
+                return 1;
+            }
+            let result = x;
+            for (let i = 1; i < n; i++) {
+                result *= x;
+            }
+            return result;
+        }
+    
+        function gcd(a, b) {
+            if (!b) {
+                return a;
+            }
+            return gcd(b, a % b);
+        }
+    
+        function minDigit(x) {
+            let min = 9;
+            while (x > 0) {
+                let digit = x % 10;
+                if (digit < min) {
+                    min = digit;
+                }
+                x = Math.floor(x / 10);
+            }
+            return min;
+        }
+    
+        function pluralizeRecords(n) {
+            if (n % 10 == 1 && Math.floor(n/10)%10!=1) {
+            return `В результате выполнения запроса была найдена ${n} запись`;
+            } else if (n%10 > 1 && n%10 < 5) {
+            return `В результате выполнения запроса было найдено ${n} записи`;
+            } else {
+            return `В результате выполнения запроса было найдено ${n} записей`;
+            }
+        }
+    
+        function fibb(n) {
+            if (n <= 1) {
+                return n;
+            }
+            let a = 0, b = 1, temp;
+            for (let i = 2; i <= n; i++) {
+                temp = a + b;
+                a = b;
+                b = temp;
+            }
+            return b;
+        }
+        function calculatePower() {
+            var base = parseInt(document.getElementById('base').value);
+            var power = parseInt(document.getElementById('power').value);
+            var result = pow(base, power);
+            document.getElementById('powerResult').innerText = result;
+        }
+
+        function calculateGCD() {
+            var num1 = parseInt(document.getElementById('num1').value);
+            var num2 = parseInt(document.getElementById('num2').value);
+            var result = gcd(num1, num2);
+            document.getElementById('gcdResult').innerText = result;
+        }
+
+        function findMinDigit() {
+            var number = parseInt(document.getElementById('number').value);
+            var result = minDigit(number);
+            document.getElementById('minDigitResult').innerText = result;
+        }
+
+        function pluralizeRecordsRes() {
+            var recordsNum = parseInt(document.getElementById('recordsNum').value);
+            var result = pluralizeRecords(recordsNum);
+            document.getElementById('pluralizationResult').innerText = result;
+        }
+
+        function calculateFib() {
+            var fibNumber = parseInt(document.getElementById('fibNumber').value);
+            var result = fibb(fibNumber);
+            document.getElementById('fibResult').innerText = result;
+        }
+    </script>
+</main>
+</body>
+</html>
+    
+
